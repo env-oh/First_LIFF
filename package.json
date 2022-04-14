@@ -6,5 +6,8 @@
     "@liff/is-api-available": "^2.19.0",
     "@line/liff": "2.19.0",
     "tslib": "^2.3.0"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
