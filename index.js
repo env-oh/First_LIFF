@@ -15,19 +15,27 @@ const statusMessage = document.getElementById('statusMessage');
 //const email = document.getElementById('email');
 
 async function main() {
-  liff.ready.then(() => {
-    if (liff.isInClient()) {
-      getUserProfile();
-    }
-  });
+  // use function after init easier
+  // liff.ready.then(
+  //   () => {
+  //     if (liff.isInClient()) {
+  //       mainLiff();
+  //     }
+  //   },
+  //   (err) => {
+  //     os.innerHTML = 'error' + err;
+  //   }
+  // );
   await liff.init(
     { liffId: '1657051316-r2qQzYRj' },
     () => {
-      if (liff.isLoggedIn()) {
-        mainLiff();
-      } else {
-        os.innerHTML = 'not login in LINE';
-      }
+      os.innerHTML = '<b>OS: </b>' + liff.getOS();
+      mainLiff();
+      // if (liff.isLoggedIn()) {
+      //   mainLiff();
+      // } else {
+      //   os.innerHTML = 'not login in LINE';
+      // }
     },
     (err) => {
       os.innerHTML = 'error' + err;
@@ -40,13 +48,9 @@ main();
 function mainLiff() {
   os.innerHTML = '<b>OS: </b>' + liff.getOS();
   if (liff.isInClient()) {
-    try {
-      getUserProfile();
-    } catch (e) {
-      userId.innerHTML = 'error' + e;
-    } finally {
-      userId.innerHTML = 'done';
-    }
+    getUserProfile();
+  } else {
+    userId.innerHTML = 'please use in LINE';
   }
 }
 
